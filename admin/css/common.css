@@ -1,0 +1,104 @@
+:root {
+    --teal: #2ec1ac; /* Primary teal color */
+    --teal_hover: #279e8c; /* Teal color for hover effects */
+}
+
+/* General font styles for the entire website */
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Custom font style for specific headers */
+.h-font {
+    font-family: 'Merienda', cursive;
+}
+
+/* Remove spinner controls from number input fields in Webkit-based browsers (e.g., Chrome, Edge) */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none; /* Hides the spinner controls */
+    margin: 0; /* Removes default margins */
+}
+
+/* Remove spinner controls from number input fields in Firefox */
+input[type=number] {
+    -moz-appearance: textfield; /* Hides the spinner controls */
+}
+
+/* Custom background style for buttons */
+.custom-bg {
+    background-color: var(--teal); /* Teal background color */
+    border: 1px solid var(--teal); /* Border matching the background */
+}
+
+/* Custom hover effect for buttons */
+.custom-bg:hover {
+    background-color: var(--teal_hover); /* Slightly darker teal on hover */
+    border-color: var(--teal_hover); /* Border color changes to match hover color */
+}
+
+/* Horizontal line styling for section dividers */
+.h-line {
+    width: 150px; /* Fixed width */
+    margin: 0 auto; /* Centers the line */
+    height: 1.7px; /* Thickness of the line */
+    background-color: var(--teal); /* Adds a color to the line for better visibility */
+}
+
+.custom-alert{
+    position: fixed;
+    top: 80px;
+    right: 25px;
+}
+
+/* Fix header at the top */
+.container-fluid.fixed-top {
+    position: fixed; /* Makes the header fixed at the top */
+}
+
+/* Adjust main content to account for the fixed header */
+#main-content {
+    margin-top: 60px; /* Adjust based on the header height */
+}
+
+/* Ensure sidebar remains fixed and full height */
+#dashboard-menu {
+    position: fixed;
+    height: 100%;
+    z-index: 11;
+    top: 70px; /* Align with the bottom of the header */
+}
+
+    /* width */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+    
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: rgb(36, 36, 36);
+    }
+    
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+/* Sidebar adjustments for small screens */
+@media screen and (max-width: 991px) {
+    #dashboard-menu {
+        height: auto;
+        width: 100%;
+    }
+    #main-content {
+        margin-top: 60px; /* Adjust for the larger header on smaller screens */
+    }
+}
+
+
+

@@ -1,0 +1,54 @@
+:root {
+    --teal: #2ec1ac; /* Primary teal color */
+    --teal_hover: #279e8c; /* Teal color for hover effects */
+}
+
+/* General font styles for the entire website */
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Custom font style for specific headers */
+.h-font {
+    font-family: 'Merienda', cursive;
+}
+
+/* Remove spinner controls from number input fields in Webkit-based browsers (e.g., Chrome, Edge) */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none; /* Hides the spinner controls */
+    margin: 0; /* Removes default margins */
+}
+
+/* Remove spinner controls from number input fields in Firefox */
+input[type=number] {
+    -moz-appearance: textfield; /* Hides the spinner controls */
+}
+
+/* Custom background style for buttons */
+.custom-bg {
+    background-color: var(--teal); /* Teal background color */
+    border: 1px solid var(--teal); /* Border matching the background */
+}
+
+/* Custom hover effect for buttons */
+.custom-bg:hover {
+    background-color: var(--teal_hover); /* Slightly darker teal on hover */
+    border-color: var(--teal_hover); /* Border color changes to match hover color */
+}
+
+/* Horizontal line styling for section dividers */
+.h-line {
+    width: 150px; /* Fixed width */
+    margin: 0 auto; /* Centers the line */
+    height: 1.7px; /* Thickness of the line */
+    background-color: var(--teal); /* Adds a color to the line for better visibility */
+}
+
+/* Custom alert message styling */
+.custom-alert{
+    position: fixed;
+    top: 80px;
+    right: 25px;
+    z-index: 1111;
+}
