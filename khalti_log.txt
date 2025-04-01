@@ -1,0 +1,10 @@
+Status Code: 401
+Response: {"detail":"Invalid token.","status_code":401}
+Status Code: 401
+Response: {"detail":"Invalid token.","status_code":401}
+Status Code: 401
+Response: {"detail":"Invalid token.","status_code":401}
+Status Code: 200
+Response: {"pidx":"hcGofsrYcBF7WMyThNsypK","payment_url":"https://test-pay.khalti.com/?pidx=hcGofsrYcBF7WMyThNsypK","expires_at":"2025-03-29T15:06:06.160823+05:45","expires_in":1800}
+Status Code: 200
+Response: {"pidx":"bG5YVLvghuCbeJC3FhWUbL","payment_url":"https://test-pay.khalti.com/?pidx=bG5YVLvghuCbeJC3FhWUbL","expires_at":"2025-03-29T15:15:40.378267+05:45","expires_in":1800}

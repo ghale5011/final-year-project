@@ -1,0 +1,6 @@
+Status Code: 400
+Response: {"detail":"JSON parse error - Expecting value: line 1 column 1 (char 0)","status_code":400}
+
+Status Code: 200
+Response: {"pidx":"vg5TSEpmFf9qeVeY6PuxA2","total_amount":180000,"status":"Completed","transaction_id":"HZMYLxUrxRTkuQnF2zDnbV","fee":0,"refunded":false}
+

@@ -71,7 +71,7 @@
             return 'inv_image'; // Invalid image MIME or format
         }
         // Check if the file size is greater than 2MB
-        else if (($image['size'] / (1024 * 1024)) > 2) {
+        else if (($image['size'] / (1024 * 1024)) > 3) {
             return 'inv_size'; // Invalid size greater than 2MB
         }
         else {
