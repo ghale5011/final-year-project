@@ -119,7 +119,7 @@
 
                         while($row = mysqli_fetch_assoc($data))
                         {
-                        $date = date('d-m-Y',strtotime($row['date'])); // Format the date
+                        $date = date('d-m-Y',strtotime($row['datentime'])); // Format the date
                         $seen='';
 
                         // Check if the query is unread and add "Mark as read" button
