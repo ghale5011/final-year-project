@@ -19,7 +19,7 @@
     define('USERS_FOLDER', 'users/');
 
     // sendgrid api key
-    define('SENDGRID_API_KEY',"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");
+    define('SENDGRID_API_KEY',"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");
     define('SENDGRID_EMAIL',"sumanghale396@gmail.com");
     define('SENDGRID_NAME',"satkarhotel");
 
