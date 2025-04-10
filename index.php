@@ -158,6 +158,30 @@
                     $book_btn = "<button onclick='checkLoginToBook($login,$room_data[id])' class='btn btn-sm text-white custom-bg shadow-none'>Book Now</button>";
                 }
 
+                $rating_q = "SELECT AVG(rating) AS `avg_rating` FROM `rating_review`
+                    WHERE `room_id`='$room_data[id]' ORDER BY `sr_no` DESC LIMIT 20";
+
+                $rating_res = mysqli_query($con,$rating_q);
+                $rating_fetch = mysqli_fetch_assoc($rating_res);
+
+                $rating_data = "";
+
+                if($rating_fetch['avg_rating']!=NULL)
+                {
+                    $rating_data = "<div class='rating mb-4'>
+                    <h6 class='mb-1'>Rating</h6>
+                    <span class='badge rounded-pill bg-light'>
+                    ";
+
+                    for($i=0; $i<$rating_fetch['avg_rating']; $i++){
+                    $rating_data .="<i class='bi bi-star-fill text-warning'></i> ";
+                    }
+
+                    $rating_data .= "</span>
+                    </div>
+                    ";
+                }
+
                 //print room card
                 echo <<<data
                     <div class="col-lg-4 col-md-6 my-3">
@@ -194,16 +218,7 @@
                                 </div>
                                 
                                 <!-- Rating Section -->
-                                <div class="rating mb-4">
-                                    <h6 class="mb-1">Rating</h6>
-                                    <span class="badge rounded-pill bg-light">
-                                        <i class="bi bi-star-fill text-warning"></i>
-                                        <i class="bi bi-star-fill text-warning"></i>
-                                        <i class="bi bi-star-fill text-warning"></i>
-                                        <i class="bi bi-star-fill text-warning"></i>
-                                    </span>
-                                </div>
-
+                                $rating_data
                                 <!-- Buttons -->
                                 <div class="d-flex justify-content-evenly mb-2">
                                 $book_btn
@@ -252,105 +267,51 @@
 </div>
 
 <!-- Testimonials Section -->
-<h2 class="mt-5 pt-4 text-center fw-bold h-font">Testimonials</h2>
+<h2 class="mt-5 pt-4 text-center fw-bold h-font">Ratings & Reviews</h2>
 <div class="container mt-5">
     <!-- Swiper for Testimonials -->
     <div class="swiper swiper-testimonials">
         <div class="swiper-wrapper mb-5">
-            <!-- Testimonial Slide 1 -->
-            <div class="swiper-slide bg-white p-4">
-                <div class="profile d-flex align-items-center mb-3">
-                    <img src="images/features/profile.svg" width="30px" alt="User Profile">
-                    <h6 class="m-0 ms-2">Random user1</h6>
-                </div>
-                <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Saepe, ea sit quod praesentium ducimus modi dolor provident 
-                    reiciendis ullam quisquam.
-                </p>
-                <div class="rating">
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                </div>
-            </div>
 
-            <!-- Testimonial Slide 2 -->
-            <div class="swiper-slide bg-white p-4">
-                <div class="profile d-flex align-items-center mb-3">
-                    <img src="images/features/star.svg" width="30px" alt="User Profile">
-                    <h6 class="m-0 ms-2">Random user1</h6>
-                </div>
-                <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Saepe, ea sit quod praesentium ducimus modi dolor provident 
-                    reiciendis ullam quisquam.
-                </p>
-                <div class="rating">
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                </div>
-            </div>
+        <?php
+          $review_q = "SELECT rr.*,uc.name AS uname, uc.profile, r.name AS rname FROM `rating_review` rr
+            INNER JOIN `user_cred` uc ON rr.user_id = uc.id
+            INNER JOIN `rooms` r ON rr.room_id = r.id
+            ORDER BY `sr_no` DESC LIMIT 6";
 
-            <!-- Testimonial Slide 3 -->
-            <div class="swiper-slide bg-white p-4">
-                <div class="profile d-flex align-items-center mb-3">
-                    <img src="images/features/star.svg" width="30px" alt="User Profile">
-                    <h6 class="m-0 ms-2">Random user1</h6>
-                </div>
-                <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Saepe, ea sit quod praesentium ducimus modi dolor provident 
-                    reiciendis ullam quisquam.
-                </p>
-                <div class="rating">
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                </div>
-            </div>
+          $review_res = mysqli_query($con,$review_q);
+          $img_path = USERS_IMG_PATH;
 
-            <!-- Testimonial Slide 4 -->
-            <div class="swiper-slide bg-white p-4">
-                <div class="profile d-flex align-items-center mb-3">
-                    <img src="images/features/star.svg" width="30px" alt="User Profile">
-                    <h6 class="m-0 ms-2">Random user1</h6>
-                </div>
-                <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Saepe, ea sit quod praesentium ducimus modi dolor provident 
-                    reiciendis ullam quisquam.
-                </p>
-                <div class="rating">
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                </div>
-            </div>
+          if(mysqli_num_rows($review_res)==0){
+            echo 'No reviews yet!';
+          }
+          else
+          {
+            while($row = mysqli_fetch_assoc($review_res))
+            {
+              $stars = "<i class='bi bi-star-fill text-warning'></i> ";
+              for($i=1; $i<$row['rating']; $i++){
+                $stars .= " <i class='bi bi-star-fill text-warning'></i>";
+              }
 
-            <!-- Testimonial Slide 5 -->
-            <div class="swiper-slide bg-white p-4">
-                <div class="profile d-flex align-items-center mb-3">
-                    <img src="images/features/star.svg" width="30px" alt="User Profile">
-                    <h6 class="m-0 ms-2">Random user1</h6>
+              echo<<<slides
+                <div class="swiper-slide bg-white p-4">
+                  <div class="profile d-flex align-items-center mb-3">
+                    <img src="$img_path$row[profile]" class="rounded-circle" loading="lazy" width="30px">
+                    <h6 class="m-0 ms-2">$row[uname]</h6>
+                  </div>
+                  <p>
+                    $row[review]
+                  </p>
+                  <div class="rating">
+                    $stars
+                  </div>
                 </div>
-                <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Saepe, ea sit quod praesentium ducimus modi dolor provident 
-                    reiciendis ullam quisquam.
-                </p>
-                <div class="rating">
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                </div>
-            </div>
+              slides;
+            }
+          }
+        
+        ?>
         </div>
 
         <!-- Swiper Pagination -->

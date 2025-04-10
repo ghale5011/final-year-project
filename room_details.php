@@ -100,13 +100,24 @@
                             echo<<<price
                                 <h4>Rs $room_data[price] per night</h6>
                             price;
+                            $rating_q = "SELECT AVG(rating) AS `avg_rating` FROM `rating_review`
+                                WHERE `room_id`='$room_data[id]' ORDER BY `sr_no` DESC LIMIT 20";
+                
+                            $rating_res = mysqli_query($con,$rating_q);
+                            $rating_fetch = mysqli_fetch_assoc($rating_res);
+                    
+                            $rating_data = "";
+                    
+                            if($rating_fetch['avg_rating']!=NULL)
+                            {
+                                for($i=0; $i < $rating_fetch['avg_rating']; $i++){
+                                $rating_data .="<i class='bi bi-star-fill text-warning'></i> ";
+                                }
+                            }
                             // Display room rating
-                            echo <<<rating
+                            echo<<<rating
                                 <div class="mb-3">
-                                    <i class="bi bi-star-fill text-warning"></i>
-                                    <i class="bi bi-star-fill text-warning"></i>
-                                    <i class="bi bi-star-fill text-warning"></i>
-                                    <i class="bi bi-star-fill text-warning"></i>
+                                $rating_data
                                 </div>
                             rating;
 
@@ -199,23 +210,45 @@
                 <!-- Reviews and Ratings -->
                 <div>
                     <h5 class="mb-3">Review & Rating</h5>
-                    <div>
-                        <div class="d-flex align-items-center mb-2">
-                            <img src="images/features/profile.svg" width="30px" alt="User Profile">
-                            <h6 class="m-0 ms-2">Random user1</h6>
-                        </div>
-                        <p>
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                            Saepe, ea sit quod praesentium ducimus modi dolor provident 
-                            reiciendis ullam quisquam.
-                        </p>
-                        <div class="rating">
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <i class="bi bi-star-fill text-warning"></i>
-                        </div>
-                    </div>
+                    <?php
+                        $review_q = "SELECT rr.*,uc.name AS uname, uc.profile, r.name AS rname FROM `rating_review` rr
+                            INNER JOIN `user_cred` uc ON rr.user_id = uc.id
+                            INNER JOIN `rooms` r ON rr.room_id = r.id
+                            WHERE rr.room_id = '$room_data[id]'
+                            ORDER BY `sr_no` DESC LIMIT 15";
+
+                            $review_res = mysqli_query($con,$review_q);
+                            $img_path = USERS_IMG_PATH;
+
+                            if(mysqli_num_rows($review_res)==0){
+                            echo 'No reviews yet!';
+                            }
+                            else
+                            {
+                            while($row = mysqli_fetch_assoc($review_res))
+                            {
+                                $stars = "<i class='bi bi-star-fill text-warning'></i> ";
+                                for($i=1; $i<$row['rating']; $i++){
+                                $stars .= " <i class='bi bi-star-fill text-warning'></i>";
+                                }
+
+                                echo<<<reviews
+                                <div class="mb-4">
+                                    <div class="d-flex align-items-center mb-2">
+                                    <img src="$img_path$row[profile]" class="rounded-circle" loading="lazy" width="30px">
+                                    <h6 class="m-0 ms-2">$row[uname]</h6>
+                                    </div>
+                                    <p class="mb-1">
+                                    $row[review]
+                                    </p>
+                                    <div>
+                                    $stars
+                                    </div>
+                                </div>
+                                reviews;
+                            }
+                        }
+                    ?>
                 </div>
             </div>
 

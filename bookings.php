@@ -115,6 +115,55 @@
   </div>
 
 
+  <div class="modal fade" id="reviewModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="review-form">
+          <div class="modal-header">
+            <h5 class="modal-title d-flex align-items-center">
+              <i class="bi bi-chat-square-heart-fill fs-3 me-2"></i> Rate & Review
+            </h5>
+            <button type="reset" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label">Rating</label>
+              <select class="form-select shadow-none" name="rating">
+                <option value="5">Excellent</option>
+                <option value="4">Good</option>
+                <option value="3">Ok</option>
+                <option value="2">Poor</option>
+                <option value="1">Bad</option>
+              </select>
+            </div>
+            <div class="mb-4">
+              <label class="form-label">Review</label>
+              <textarea type="password" name="review" rows="3" required class="form-control shadow-none"></textarea>
+            </div>
+            
+            <input type="hidden" name="booking_id">
+            <input type="hidden" name="room_id">
+
+            <div class="text-end">
+              <button type="submit" class="btn custom-bg text-white shadow-none">SUBMIT</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+  <?php 
+    if(isset($_GET['cancel_status'])){
+      alert('success','Booking Cancelled!');
+    }  
+    else if(isset($_GET['review_status'])){
+      alert('success','Thank you for rating & review!');
+    }  
+  ?>
+
   <?php require('inc/footer.php'); ?>
 
   <script>

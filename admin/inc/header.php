@@ -45,6 +45,9 @@
                         <a class="nav-link text-white" href="user_queries.php">User Queries</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link text-white" href="rate_review.php">Ratings & Reviews</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link text-white" href="rooms.php">Rooms</a>
                     </li>
                     <li class="nav-item">
@@ -52,7 +55,7 @@
                     </li>
                     
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="carousel.php">Carousel</a>
+                        <a class="nav-link text-white" href="carousel.php">Cover Images</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="settings.php">Settings</a>
